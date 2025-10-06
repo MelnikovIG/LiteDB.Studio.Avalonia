@@ -4,6 +4,7 @@ open Avalonia.Controls
 open Avalonia.Controls.Templates
 open System.Collections.Generic
 open Avalonia.Metadata
+open LiteDb.Studio.Avalonia.ViewModels
 
 type ValueTemplateSelector() =
     let mutable content = new Dictionary<string, IDataTemplate>()

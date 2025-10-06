@@ -4,6 +4,7 @@ open System
 open System.Collections.Generic
 open System.Collections.ObjectModel
 open LiteDb.Studio.Avalonia.Infra
+open LiteDb.Studio.Avalonia.ViewModels
 open ReactiveUI
 
 type PagingViewModel(source: ObservableCollection<BsonItem>) =

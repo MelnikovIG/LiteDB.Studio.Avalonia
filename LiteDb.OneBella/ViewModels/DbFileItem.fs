@@ -3,6 +3,7 @@ namespace OneBella.ViewModels
 open System.Collections.Concurrent
 open System.Reflection
 open LiteDB
+open LiteDb.Studio.Avalonia.Core
 open OneBella.Core
 open ReactiveUI
 
@@ -14,7 +15,7 @@ type DbFileItem(db: LiteDatabase, conString: ConnectionString) as this =
     let disconnect () =
         if not (liteDb = null) then
             liteDb.Checkpoint()
-            DbUtils.dispose_hack liteDb
+            DbUtils.DisposeHack liteDb
             liteDb <- null
             this.RaisePropertyChanged(nameof this.IsConnected)
 

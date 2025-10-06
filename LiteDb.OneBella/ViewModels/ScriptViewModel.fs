@@ -11,11 +11,12 @@ open Avalonia.Controls
 open Avalonia.Controls.Models.TreeDataGrid
 open Avalonia.Threading
 open LiteDB
+open LiteDb.Studio.Avalonia.Core
 open LiteDb.Studio.Avalonia.Infra
+open LiteDb.Studio.Avalonia.ViewModels
 open Microsoft.FSharp.Core
 open OneBella.Core.Rop
 
-open OneBella.Core.DbUtils
 open Microsoft.FSharp.Control
 open ReactiveUI
 open OneBella.UseCases
@@ -88,7 +89,7 @@ type ScriptViewModel(db: unit -> LiteDatabase, dbFile: string, name: string) as 
             if not (bsonValues = null) then
                 let tableName = RunSql.findTableName this.Query
                 for i in bsonValues do
-                    result.Add(BsonItem("result", i, -1, None, tableName, db, IsExpanded = true))
+                    result.Add(BsonItem("result", i, -1, null, Option.toObj tableName, db, IsExpanded = true))
 
                 paging.CalculatePages(querySw.Elapsed)
 
@@ -137,7 +138,7 @@ type ScriptViewModel(db: unit -> LiteDatabase, dbFile: string, name: string) as 
             |> run
             |> map (fun _ -> db ())
             |> inspect (fun _ -> info $"Executing db checkpoint") err
-            |> map (fun db -> Async.StartImmediate(checkpoint db))
+            |> map (fun db -> DbUtils.Checkpoint db |> Async.AwaitTask)
             |> inspect (fun _ -> info $"checkpoint done") err
             |> finish (fun _ -> afterRunSql Seq.empty)
 
@@ -149,7 +150,7 @@ type ScriptViewModel(db: unit -> LiteDatabase, dbFile: string, name: string) as 
             |> run
             |> map (fun _ -> db ())
             |> inspect (fun _ -> info $"Shrinking db") err
-            |> map (fun db -> Async.StartImmediate(shrink db))
+            |> map (fun db -> DbUtils.Shrink db |> Async.AwaitTask)
             |> inspect (fun _ -> info $"shrink done") err
             |> finish (fun _ -> afterRunSql Seq.empty)
 

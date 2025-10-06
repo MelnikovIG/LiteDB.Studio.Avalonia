@@ -27,12 +27,9 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Core\ConnectionParameters.fs" />
-        <Compile Include="Core\DbUtils.fs" />
-        <Compile Include="Core\BVal.fs" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="UseCases\RunSql.fs" />
-        <Compile Include="UseCases\UpdateField.fs" />
         <Compile Include="UseCases\StoredConn.fs" />
     </ItemGroup>
 
@@ -50,7 +47,6 @@
         <Content Include="Resources\ldb.ico" />
         <None Remove=".gitignore" />
         <Compile Include="ViewModels\ViewModelBase.fs" />
-        <Compile Include="ViewModels\BsonItem.fs" />
         <Compile Include="ViewModels\DbAction.fs" />
         <Compile Include="ViewModels\DbItem.fs" />
         <Compile Include="ViewModels\DbFileItem.fs" />

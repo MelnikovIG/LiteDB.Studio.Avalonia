@@ -3,9 +3,9 @@
 open System.Collections.ObjectModel
 open System.IO
 open LiteDB
+open LiteDb.Studio.Avalonia.Core
 open LiteDb.Studio.Avalonia.Infra
 open OneBella.Core
-open OneBella.Core.DbUtils
 open ReactiveUI
 
 type MainWindowViewModel() as this =
@@ -53,7 +53,7 @@ type MainWindowViewModel() as this =
         let dbFile = con.DbFile
         let conString = ConnectionParameters.buildConString con
 
-        let liteDb = getDb conString
+        let liteDb = DbUtils.GetDb conString
 
         let name = Path.GetFileName dbFile
         let root = DbFileItem(liteDb, conString, Title = name, IsExpanded = true)
@@ -63,11 +63,11 @@ type MainWindowViewModel() as this =
         let getLiteDb = fun () -> root.LiteDb
 
         liteDb
-        |> getSystemTables
+        |> DbUtils.GetSystemTables
         |> Seq.map (fun doc -> DbItem(Title = doc.["name"].AsString, IsCollection = true))
         |> Seq.iter (fun i -> system.Children.Add i)
 
-        let collections = getCollectionNames liteDb
+        let collections = DbUtils.GetCollectionNames liteDb
 
         collections
         |> Seq.map (fun name -> createTableItem getLiteDb dbFile name)

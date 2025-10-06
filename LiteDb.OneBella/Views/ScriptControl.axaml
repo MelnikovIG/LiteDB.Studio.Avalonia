@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:OneBella.ViewModels"
+             xmlns:vm1="using:LiteDb.Studio.Avalonia.ViewModels"
              xmlns:view="using:OneBella.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="OneBella.Views.ScriptControl">
@@ -29,16 +30,16 @@
                     <TreeDataGrid Source="{Binding Source}" x:Name="TreeDataGridResults" >
                         <TreeDataGrid.Resources>
                             <vm:ValueTemplateSelector x:Key="BsonItemValueSelector">
-                                <DataTemplate x:Key="JsonValue" x:DataType="vm:BsonItem">
+                                <DataTemplate x:Key="JsonValue" x:DataType="vm1:BsonItem">
                                     <view:JsonTextEditor Text="{Binding Value}"></view:JsonTextEditor>
                                 </DataTemplate>
-                                <DataTemplate x:Key="ArrayValue" x:DataType="vm:BsonItem">
+                                <DataTemplate x:Key="ArrayValue" x:DataType="vm1:BsonItem">
                                     <TextBlock Text="{Binding Value}" FontSize="13" Foreground="{StaticResource LdbGrayedOutColor}" VerticalAlignment="Center"></TextBlock>
                                 </DataTemplate>
-                                <DataTemplate x:Key="DocValue" x:DataType="vm:BsonItem">
+                                <DataTemplate x:Key="DocValue" x:DataType="vm1:BsonItem">
                                     <TextBlock Text="{Binding Value}" FontSize="13" Foreground="{StaticResource LdbGrayedOutColor}" VerticalAlignment="Center"></TextBlock>
                                 </DataTemplate>
-                                <DataTemplate x:Key="BoolValue" x:DataType="vm:BsonItem">
+                                <DataTemplate x:Key="BoolValue" x:DataType="vm1:BsonItem">
                                     <!-- <CheckBox IsChecked="{Binding Value}" IsHitTestVisible="False" VerticalAlignment="Center"></CheckBox> -->
                                     <Grid ColumnDefinitions="*, Auto">
                                         <ToggleSwitch IsChecked="{Binding Value}" IsHitTestVisible="False" VerticalAlignment="Center"
@@ -73,7 +74,7 @@
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
-                                <DataTemplate x:Key="StringValue" x:DataType="vm:BsonItem">
+                                <DataTemplate x:Key="StringValue" x:DataType="vm1:BsonItem">
                                     <Grid ColumnDefinitions="*, Auto">
 
                                         <TextBlock VerticalAlignment="Center" Text="{Binding Value}" Foreground="#9EC0E3" IsVisible="{Binding !CanShowEditor}"></TextBlock>
@@ -100,7 +101,7 @@
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
-                                <DataTemplate x:Key="NumberValue" x:DataType="vm:BsonItem">
+                                <DataTemplate x:Key="NumberValue" x:DataType="vm1:BsonItem">
                                     <Grid ColumnDefinitions="*, Auto">
                                         <TextBlock VerticalAlignment="Center" Text="{Binding Value}" Foreground="#638CB3" IsVisible="{Binding !CanShowEditor}"></TextBlock>
                                         <NumericUpDown VerticalAlignment="Center" Value="{Binding Value}" Foreground="#638CB3" IsVisible="{Binding CanShowEditor}"></NumericUpDown>
@@ -125,12 +126,12 @@
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
-                                <DataTemplate x:Key="OthersValue" x:DataType="vm:BsonItem">
+                                <DataTemplate x:Key="OthersValue" x:DataType="vm1:BsonItem">
                                     <TextBlock VerticalAlignment="Center" Text="{Binding Value}"></TextBlock>
                                 </DataTemplate>
                             </vm:ValueTemplateSelector>
                             <vm:ValueTemplateSelector x:Key="BsonItemNameSelector">
-                                <DataTemplate x:Key="Doc" x:DataType="vm:BsonItem">
+                                <DataTemplate x:Key="Doc" x:DataType="vm1:BsonItem">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <Viewbox Height="14" Width="14">
                                             <Canvas Width="24" Height="24">
@@ -141,7 +142,7 @@
                                         <TextBlock Margin="5 0 5 0" VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
                                     </StackPanel>
                                 </DataTemplate>
-                                <DataTemplate x:Key="Others" x:DataType="vm:BsonItem">
+                                <DataTemplate x:Key="Others" x:DataType="vm1:BsonItem">
                                     <TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
                                 </DataTemplate>
                             </vm:ValueTemplateSelector>

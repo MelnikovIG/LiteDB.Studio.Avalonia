@@ -7,9 +7,9 @@ open System.Text
 open System.Text.RegularExpressions
 open System.Threading
 open LiteDB
+open LiteDb.Studio.Avalonia.Core
 open OneBella.Core
 open OneBella.Core.Rop
-open OneBella.Core.DbUtils
 
 type T =
     { Stopwatch: Stopwatch
@@ -70,8 +70,8 @@ let findTableName sql =
 let run (req: T) =
     let db = req.Db()
     req.Stopwatch.Restart()
-    use reader = req.Query |> removeComments |> exec db
-    let bsonValues = reader |> readResult req.Token |> Seq.map BVal.create |> Seq.toArray
+    use reader =  DbUtils.Exec(db, req.Query |> removeComments);
+    let bsonValues = DbUtils.ReadResult(reader, req.Token) |> Seq.map BVal.Create |> Seq.toArray
     //|> Seq.toArray
     req.Stopwatch.Stop()
     bsonValues
