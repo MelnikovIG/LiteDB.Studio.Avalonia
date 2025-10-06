@@ -4,7 +4,7 @@ open Avalonia
 open Avalonia.Controls.ApplicationLifetimes
 open Avalonia.Markup.Xaml
 open LiteDb.Studio.Avalonia.ViewModels
-open OneBella.Views
+open LiteDb.Studio.Avalonia.Views
 
 type App() =
     inherit Application()

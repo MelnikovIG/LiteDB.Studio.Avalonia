@@ -35,14 +35,6 @@
         </None>
         <Content Include="Resources\ldb.ico" />
         <None Remove=".gitignore" />
-       
-        <Compile Include="Views\ConnectionControl.axaml.fs" />
-        <Compile Include="Views\AddConnectionWindow.axaml.fs" />
-        <Compile Include="Views\CharFoldingStrategy.fs" />
-        <Compile Include="Views\ScriptControl.axaml.fs" />
-        <Compile Include="Views\SqlTextEditor.axaml.fs" />
-        <Compile Include="Views\JsonTextEditor.axaml.fs" />
-        <Compile Include="Views\MainWindow.axaml.fs" />
         <Compile Include="App.axaml.fs" />
         <Compile Include="Program.fs" />
         <Content Include="..\README.md">
