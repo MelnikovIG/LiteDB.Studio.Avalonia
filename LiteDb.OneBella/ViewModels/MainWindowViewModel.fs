@@ -5,7 +5,6 @@ open System.IO
 open LiteDB
 open LiteDb.Studio.Avalonia.Core
 open LiteDb.Studio.Avalonia.Infra
-open OneBella.Core
 open ReactiveUI
 
 type MainWindowViewModel() as this =

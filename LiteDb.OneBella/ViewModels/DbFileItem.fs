@@ -4,7 +4,6 @@ open System.Collections.Concurrent
 open System.Reflection
 open LiteDB
 open LiteDb.Studio.Avalonia.Core
-open OneBella.Core
 open ReactiveUI
 
 

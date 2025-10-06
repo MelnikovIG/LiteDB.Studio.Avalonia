@@ -22,9 +22,6 @@
         <!--        <NSPrincipalClass>NSApplication</NSPrincipalClass>-->
         <!--        <NSHighResolutionCapable>true</NSHighResolutionCapable>-->
     </PropertyGroup>
-    <ItemGroup>
-        <Compile Include="Infra\Res.fs" />
-    </ItemGroup>
 
     <ItemGroup>
         <AvaloniaResource Include="Assets\**" />

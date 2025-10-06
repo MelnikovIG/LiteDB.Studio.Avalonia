@@ -16,10 +16,17 @@ open LiteDb.Studio.Avalonia.Infra
 open LiteDb.Studio.Avalonia.UseCases
 open LiteDb.Studio.Avalonia.ViewModels
 open Microsoft.FSharp.Core
-open OneBella.Core.Rop
 
 open Microsoft.FSharp.Control
 open ReactiveUI
+
+module Rop =
+    let run f = Rop.Run(Func<_>(f))
+    let map f res = Rop.Map(Func<_,_>(f), res)
+    let log onOk onFailed res = Rop.Log(Action<_>(onOk), Action<Exception>(onFailed), res)
+    let inspect onOk onFailed res = Rop.Inspect(Action<_>(onOk), Action<Exception>(onFailed), res)
+    let tryMapErr f res = Rop.TryMapErr(Func<Exception,_>(f), res)
+    let finish f res = Rop.Finish(Action<_>(f), res)
 
 type ScriptViewModel(db: unit -> LiteDatabase, dbFile: string, name: string) as this =
     inherit ViewModelBase()
@@ -119,13 +126,13 @@ type ScriptViewModel(db: unit -> LiteDatabase, dbFile: string, name: string) as 
         use cs = new CancellationTokenSource()
 
         beforeRunSql
-        |> run
-        |> log (fun _ -> info $"Executing {sql}") err
-        |> map (fun _ -> runSql sql cs.Token)
-        |> log (fun b -> info $"Done {sql}") err
-        |> tryMapErr (fun j -> Array.empty)
-        |> log (fun _ -> info $"Showing query results") err
-        |> finish (fun bson -> afterRunSql bson)
+        |> Rop.run
+        |> Rop.log (fun _ -> info $"Executing {sql}") err
+        |> Rop.map (fun _ -> runSql sql cs.Token)
+        |> Rop.log (fun b -> info $"Done {sql}") err
+        |> Rop.tryMapErr (fun j -> Array.empty)
+        |> Rop.log (fun _ -> info $"Showing query results") err
+        |> Rop.finish (fun bson -> afterRunSql bson)
 
 
     let runSqlCommand =
@@ -135,24 +142,24 @@ type ScriptViewModel(db: unit -> LiteDatabase, dbFile: string, name: string) as 
     let checkpointCommand =
         let run () =
             beforeRunSql
-            |> run
-            |> map (fun _ -> db ())
-            |> inspect (fun _ -> info $"Executing db checkpoint") err
-            |> map (fun db -> DbUtils.Checkpoint db |> Async.AwaitTask)
-            |> inspect (fun _ -> info $"checkpoint done") err
-            |> finish (fun _ -> afterRunSql Seq.empty)
+            |> Rop.run
+            |> Rop.map (fun _ -> db ())
+            |> Rop.inspect (fun _ -> info $"Executing db checkpoint") err
+            |> Rop.map (fun db -> DbUtils.Checkpoint db |> Async.AwaitTask)
+            |> Rop.inspect (fun _ -> info $"checkpoint done") err
+            |> Rop.finish (fun _ -> afterRunSql Seq.empty)
 
         ReactiveCommand.Create(fun () -> ignore (Task.Run run))
 
     let shrinkCommand =
         let run () =
             beforeRunSql
-            |> run
-            |> map (fun _ -> db ())
-            |> inspect (fun _ -> info $"Shrinking db") err
-            |> map (fun db -> DbUtils.Shrink db |> Async.AwaitTask)
-            |> inspect (fun _ -> info $"shrink done") err
-            |> finish (fun _ -> afterRunSql Seq.empty)
+            |> Rop.run
+            |> Rop.map (fun _ -> db ())
+            |> Rop.inspect (fun _ -> info $"Shrinking db") err
+            |> Rop.map (fun db -> DbUtils.Shrink db |> Async.AwaitTask)
+            |> Rop.inspect (fun _ -> info $"shrink done") err
+            |> Rop.finish (fun _ -> afterRunSql Seq.empty)
 
         ReactiveCommand.Create(fun () -> ignore (Task.Run run))
 

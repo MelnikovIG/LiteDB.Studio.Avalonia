@@ -6,7 +6,6 @@ open System.IO
 open System.Threading.Tasks
 open LiteDB
 open LiteDb.Studio.Avalonia.Core
-open OneBella.Core
 open ReactiveUI
 
 type ConnectionViewModel(savedConnections: ConnParamType array) as this =
