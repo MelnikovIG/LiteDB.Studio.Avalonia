@@ -1,12 +1,12 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="using:OneBella"
-             Name="OneBella"
+             xmlns:local="using:LiteDb.Studio.Avalonia"
+             Name="LiteDb.Studio.Avalonia"
 			RequestedThemeVariant="Dark"
-             x:Class="OneBella.App">
+             x:Class="LiteDb.Studio.Avalonia.App">
     <NativeMenu.Menu>
         <NativeMenu>
-            <NativeMenuItem Header="About OneBella"  />
+            <NativeMenuItem Header="About LiteDb.Studio.Avalonia"  />
         </NativeMenu>
     </NativeMenu.Menu>
     <Application.Resources>

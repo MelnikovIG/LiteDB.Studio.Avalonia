@@ -1,17 +1,17 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:OneBella.ViewModels"
-        xmlns:view="using:OneBella.Views"
+        xmlns:vm="using:LiteDb.Studio.Avalonia.ViewModels"
+        xmlns:view="using:LiteDb.Studio.Avalonia.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="OneBella.Views.MainWindow"
+        x:Class="LiteDb.Studio.Avalonia.Views.MainWindow"
         Icon="/Assets/ldb.ico"
         Background="{StaticResource LdbWindowBackground}"
         WindowState="Normal"
         
         ExtendClientAreaToDecorationsHint="True"
-        Title="OneBella">
+        Title="LiteDb.Studio.Avalonia">
 
     <Design.DataContext>
         <vm:MainWindowViewModel />
@@ -37,7 +37,7 @@
                             </Style>
                         </StackPanel.Styles>
                         <!-- add db -->
-                        <Button Click="OpenConnectionWindowCLick" ToolTip.Tip="Connect to a database">
+                        <Button Click="OpenConnectionWindowClick" ToolTip.Tip="Connect to a database">
                             <Viewbox>
                                 <Canvas Width="24" Height="24">
                                     <Path Fill="{StaticResource LdbTextColor}"

@@ -3,8 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             xmlns:vm="using:OneBella.ViewModels"
-             x:Class="OneBella.Views.ConnectionControl">
+             xmlns:vm="using:LiteDb.Studio.Avalonia.ViewModels"
+             x:Class="LiteDb.Studio.Avalonia.Views.ConnectionControl">
     <Design.DataContext>
         <vm:ConnectionViewModel />
     </Design.DataContext>
@@ -94,7 +94,7 @@
                             </ComboBox>
 
                         </DockPanel>
-                        <Button Grid.Column="2" Grid.Row="0"  Content="..." Click="SelectDbFileCLick" Margin="0 0 5 0" HorizontalAlignment="Right">
+                        <Button Grid.Column="2" Grid.Row="0"  Content="..." Click="SelectDbFileClick" Margin="0 0 5 0" HorizontalAlignment="Right">
 
                         </Button>
                         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SelectedConnectionItem.Password}" PasswordChar="*" Margin="5 10 5 5"></TextBox>
