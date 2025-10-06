@@ -26,15 +26,10 @@
         <Compile Include="Infra\Res.fs" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Core\ConnectionParameters.fs" />
-    </ItemGroup>
-    <ItemGroup>
         <Compile Include="UseCases\RunSql.fs" />
-        <Compile Include="UseCases\StoredConn.fs" />
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Include="Repo\Repo.fs" />
         <AvaloniaResource Include="Assets\**" />
         <Content Include="OneBella.entitlements" />
         <EmbeddedResource Include="Resources\json.xshd" />

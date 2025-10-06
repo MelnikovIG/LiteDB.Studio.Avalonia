@@ -6,6 +6,8 @@ open Avalonia.Controls
 open Avalonia.Controls.ApplicationLifetimes
 open Avalonia.Interactivity
 open Avalonia.Markup.Xaml
+open LiteDb.Studio.Avalonia.Repo
+open LiteDb.Studio.Avalonia.UseCases
 open OneBella
 open OneBella.UseCases
 open OneBella.ViewModels
@@ -22,7 +24,7 @@ type MainWindow () as this =
     do this.Opened |> Observable.add (fun _ -> this.OpenConnectionWindowCLick(this, null))
     do this.Closed |> Observable.add (fun _ ->
          let vm = this.DataContext :?> MainWindowViewModel
-         Repo.disconnect()
+         Repo.Disconnect()
          for d in vm.DbItems do
             if d.IsConnected then
                d.Disconnect()
@@ -58,8 +60,7 @@ type MainWindow () as this =
             try
                conVm.Error <- "" 
                vm.Connect(con)
-               StoredConnUseCase.create Repo.getDb
-               |> StoredConnUseCase.save con
+               StoredConnUseCase.Save(con, StoredConnUseCase.Create(fun _ -> Repo.GetDb()))
 
             with
             | exc -> 
@@ -74,8 +75,8 @@ type MainWindow () as this =
             match Application.Current.ApplicationLifetime with
             | :? IClassicDesktopStyleApplicationLifetime as desktop ->
                 //let savedConnections = Repo.getConnSettings()
-                let uc =StoredConnUseCase.create Repo.getDb
-                let p = StoredConnUseCase.loadAll uc |> Seq.toArray
+                let uc =StoredConnUseCase.Create(fun _ -> Repo.GetDb())
+                let p = StoredConnUseCase.LoadAll uc |> Seq.toArray
                 let vm =ConnectionViewModel(p)
                 do! showAddWindow desktop.MainWindow vm
             | _ -> ()

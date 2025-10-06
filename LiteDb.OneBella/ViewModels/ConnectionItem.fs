@@ -3,7 +3,10 @@ namespace OneBella.ViewModels
 open System
 open System.Collections.ObjectModel
 open LiteDB
+open LiteDb.Studio.Avalonia.Core
 open LiteDb.Studio.Avalonia.Infra
+open LiteDb.Studio.Avalonia.Repo
+open LiteDb.Studio.Avalonia.UseCases
 open OneBella
 open OneBella.Core
 open OneBella.UseCases
@@ -33,11 +36,11 @@ type ConnectionItem(id, cs: ConnectionString, parent: ObservableCollection<Conne
             |> Array.find (fun x -> x = cs.Collation.SortOptions.ToString())
         else
             ""
-
+            
     let deleteConnectionCommand =
         let run () =
             if (id > 0) then
-                StoredConnUseCase.deleteById id { Db = Repo.getDb }
+                StoredConnUseCase.DeleteById(id, StoredConnUseCase.T(fun _ -> Repo.GetDb()))
                 parent.Remove(this) |> ignore
 
         ReactiveCommand.Create(run)

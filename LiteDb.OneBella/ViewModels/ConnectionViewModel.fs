@@ -5,6 +5,7 @@ open System.Collections.ObjectModel
 open System.IO
 open System.Threading.Tasks
 open LiteDB
+open LiteDb.Studio.Avalonia.Core
 open OneBella.Core
 open ReactiveUI
 
@@ -28,7 +29,7 @@ type ConnectionViewModel(savedConnections: ConnParamType array) as this =
     do
         savedConnections
         |> Array.map (fun c ->
-            let cstr = ConnectionParameters.buildConString c
+            let cstr = ConnectionParameters.BuildConString c
             ConnectionItem(c.Id, cstr, conItems))
         |> fun items -> ObservableCollection(items)
         |> fun items ->
@@ -88,7 +89,7 @@ type ConnectionViewModel(savedConnections: ConnParamType array) as this =
                 | None ->
                     let connParams = x.SelectedConnectionItem.GetParameters()
                     connParams.DbFile <- result[0]
-                    let cs = ConnectionParameters.buildConString connParams
+                    let cs = ConnectionParameters.BuildConString connParams
                     let c = ConnectionItem(0, cs, conItems)
                     conItems.Add c
                     x.SelectedConnectionItem <- c
