@@ -11,11 +11,11 @@ open Avalonia.Controls
 open Avalonia.Controls.Models.TreeDataGrid
 open Avalonia.Threading
 open LiteDB
+open LiteDb.Studio.Avalonia.Infra
 open Microsoft.FSharp.Core
 open OneBella.Core.Rop
 
 open OneBella.Core.DbUtils
-open OneBella.Infra.Log
 open Microsoft.FSharp.Control
 open ReactiveUI
 open OneBella.UseCases
@@ -64,10 +64,10 @@ type ScriptViewModel(db: unit -> LiteDatabase, dbFile: string, name: string) as 
 
     let info (msg: string) =
         ignore <| logSb.AppendLine msg
-        logInfo msg
+        Log.LogInfo msg
 
     let err exc =
-        logExc exc
+        Log.LogExc exc
         ignore <| logSb.AppendLine(exc.ToString())
 
     let beforeRunSql () =

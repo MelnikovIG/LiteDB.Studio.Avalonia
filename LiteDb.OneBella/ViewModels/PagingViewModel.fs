@@ -3,7 +3,7 @@ namespace OneBella.ViewModels
 open System
 open System.Collections.Generic
 open System.Collections.ObjectModel
-open OneBella.Models.Utils
+open LiteDb.Studio.Avalonia.Infra
 open ReactiveUI
 
 type PagingViewModel(source: ObservableCollection<BsonItem>) =
@@ -11,7 +11,7 @@ type PagingViewModel(source: ObservableCollection<BsonItem>) =
 
     //let mutable elapsed = TimeSpan.FromSeconds(0)
     let mutable tempSource = source
-    let pages = Dictionary<int, int * int>()
+    let pages = Dictionary<int, struct(int * int)>()
 
     let displaySource =
         let temp = ObservableCollection<BsonItem>()
@@ -26,7 +26,7 @@ type PagingViewModel(source: ObservableCollection<BsonItem>) =
         if (pages.ContainsKey pageNumber) then
             currentPage <- pageNumber
             displaySource.Clear()
-            let pageStart, pageEnd = pages[pageNumber]
+            let struct(pageStart, pageEnd) = pages[pageNumber]
 
             for i in pageStart..pageEnd do
                 displaySource.Add tempSource.[i]
@@ -89,7 +89,7 @@ type PagingViewModel(source: ObservableCollection<BsonItem>) =
     member x.NextPageCommand = nextPageCommand
 
     member x.GetCurrentPageBoundaries() =
-         let pageStart, pageEnd = pages[currentPage]
+         let struct(pageStart, pageEnd) = pages[currentPage]
          (pageStart, pageEnd)
 
     member x.PageSize
@@ -112,7 +112,7 @@ type PagingViewModel(source: ObservableCollection<BsonItem>) =
             flattened |> Seq.iter (fun i -> tempSource.Add i)
 
         if (tempSource.Count > 0) then
-            for kvp in getPages x.PageSize tempSource.Count do
+            for kvp in Utils.GetPages(x.PageSize, tempSource.Count) do
                 pages[kvp.Key] <- kvp.Value
 
             showPage 0

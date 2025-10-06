@@ -3,9 +3,9 @@
 open System.Collections.ObjectModel
 open System.IO
 open LiteDB
+open LiteDb.Studio.Avalonia.Infra
 open OneBella.Core
 open OneBella.Core.DbUtils
-open OneBella.Models.Utils
 open ReactiveUI
 
 type MainWindowViewModel() as this =
@@ -15,9 +15,9 @@ type MainWindowViewModel() as this =
     let mutable selectedTab = Unchecked.defaultof<ScriptViewModel>
 
     let openNewTab getLiteDb dbFile tableName =
-        let scriptName = scriptTabs |> Seq.map (fun c -> c.Header) |> getScriptName
+        let scriptName = scriptTabs |> Seq.map (fun c -> c.Header) |> Utils.GetScriptName
         let tab = new ScriptViewModel(getLiteDb, dbFile, scriptName)
-        tab.Query <- getDefaultSql tableName
+        tab.Query <- Utils.GetDefaultSql tableName
         scriptTabs.Add(tab)
         this.SelectedTab <- tab
 

@@ -23,8 +23,6 @@
         <!--        <NSHighResolutionCapable>true</NSHighResolutionCapable>-->
     </PropertyGroup>
     <ItemGroup>
-        <Compile Include="Infra\Log.fs" />
-        <Compile Include="Infra\Utils.fs" />
         <Compile Include="Infra\Res.fs" />
     </ItemGroup>
     <ItemGroup>
@@ -104,6 +102,9 @@
     </ItemGroup>
     <ItemGroup>
       <PackageReference Update="FSharp.Core" Version="8.0.400" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\LiteDb.Studio.Avalonia\LiteDb.Studio.Avalonia.csproj" />
     </ItemGroup>
    
 </Project>

@@ -1,9 +1,9 @@
 module OneBella.Repo
 
 open LiteDB
-open OneBella.Models
+open LiteDb.Studio.Avalonia.Infra
 
-let private db = new LiteDatabase(Utils.getAppDataPath () + $"/{Utils.appName}.db")
+let private db = new LiteDatabase(Utils.GetAppDataPath () + $"/{Utils.AppName}.db")
 
 let getDb () = db
 

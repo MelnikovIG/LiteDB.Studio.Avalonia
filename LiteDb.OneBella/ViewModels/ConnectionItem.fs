@@ -3,11 +3,11 @@ namespace OneBella.ViewModels
 open System
 open System.Collections.ObjectModel
 open LiteDB
+open LiteDb.Studio.Avalonia.Infra
 open OneBella
 open OneBella.Core
 open OneBella.UseCases
 open ReactiveUI
-open OneBella.Models.Utils
 
 type ConnectionItem(id, cs: ConnectionString, parent: ObservableCollection<ConnectionItem>) as this =
     inherit ViewModelBase()
@@ -23,13 +23,13 @@ type ConnectionItem(id, cs: ConnectionString, parent: ObservableCollection<Conne
 
     let mutable selectedCulture =
         if not (cs.Collation = null) then
-            getCultures () |> Array.find (fun x -> x = cs.Collation.Culture.Name)
+            Utils.GetCultures () |> Array.find (fun x -> x = cs.Collation.Culture.Name)
         else
             ""
 
     let mutable selectedCompareOption =
         if not (cs.Collation = null) then
-            getCompareOptions ()
+            Utils.GetCompareOptions ()
             |> Array.find (fun x -> x = cs.Collation.SortOptions.ToString())
         else
             ""
@@ -44,8 +44,8 @@ type ConnectionItem(id, cs: ConnectionString, parent: ObservableCollection<Conne
 
 
     member x.DeleteConnectionCommand = deleteConnectionCommand
-    member x.CompareOptions = getCompareOptions ()
-    member x.Cultures = getCultures ()
+    member x.CompareOptions = Utils.GetCompareOptions ()
+    member x.Cultures = Utils.GetCultures ()
 
     member x.SelectedCulture
         with get () = selectedCulture
