@@ -7,7 +7,6 @@ open Avalonia
 open Avalonia.Controls
 open Avalonia.Markup.Xaml
 open LiteDb.Studio.Avalonia.ViewModels
-open OneBella.ViewModels
 
 type ScriptControl() as this=
     inherit UserControl()

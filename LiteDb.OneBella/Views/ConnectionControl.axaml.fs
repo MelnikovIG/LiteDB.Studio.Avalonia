@@ -5,7 +5,7 @@ open Avalonia.Controls
 open Avalonia.Controls.ApplicationLifetimes
 open Avalonia.Interactivity
 open Avalonia.Markup.Xaml
-open OneBella.ViewModels
+open LiteDb.Studio.Avalonia.ViewModels
 
 type ConnectionControl() as this =
     inherit UserControl()

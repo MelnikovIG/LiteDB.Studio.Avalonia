@@ -3,7 +3,7 @@ namespace OneBella
 open Avalonia
 open Avalonia.Controls.ApplicationLifetimes
 open Avalonia.Markup.Xaml
-open OneBella.ViewModels
+open LiteDb.Studio.Avalonia.ViewModels
 open OneBella.Views
 
 type App() =

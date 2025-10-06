@@ -3,8 +3,8 @@ namespace OneBella.Views
 open Avalonia
 open Avalonia.Controls
 open Avalonia.Markup.Xaml
-open OneBella.ViewModels
 open LiteDB
+open LiteDb.Studio.Avalonia.ViewModels
 
 type AddConnectionWindow(conVm:ConnectionViewModel) as this=
     inherit Window()

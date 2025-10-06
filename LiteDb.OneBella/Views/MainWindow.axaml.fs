@@ -8,9 +8,9 @@ open Avalonia.Interactivity
 open Avalonia.Markup.Xaml
 open LiteDb.Studio.Avalonia.Repo
 open LiteDb.Studio.Avalonia.UseCases
-open OneBella.ViewModels
 open Avalonia.Input
 open System.Windows.Input
+open LiteDb.Studio.Avalonia.ViewModels
 
 type MainWindow () as this = 
     inherit Window ()

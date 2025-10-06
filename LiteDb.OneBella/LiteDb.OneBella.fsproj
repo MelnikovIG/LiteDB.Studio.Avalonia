@@ -35,17 +35,6 @@
         </None>
         <Content Include="Resources\ldb.ico" />
         <None Remove=".gitignore" />
-        <Compile Include="ViewModels\ViewModelBase.fs" />
-        <Compile Include="ViewModels\DbAction.fs" />
-        <Compile Include="ViewModels\DbItem.fs" />
-        <Compile Include="ViewModels\DbFileItem.fs" />
-        <Compile Include="ViewModels\PagingViewModel.fs" />
-        <Compile Include="ViewModels\ScriptViewModel.fs" />
-        <Compile Include="ViewModels\ConnectionItem.fs" />
-        <Compile Include="ViewModels\ConnectionViewModel.fs" />
-        <Compile Include="ViewModels\MainWindowViewModel.fs" />
-        <Compile Include="ViewModels\ValueTemplateSelector.fs" />
-        <Compile Include="ViewModels\DbItemTemplateSelector.fs" />
        
         <Compile Include="Views\ConnectionControl.axaml.fs" />
         <Compile Include="Views\AddConnectionWindow.axaml.fs" />

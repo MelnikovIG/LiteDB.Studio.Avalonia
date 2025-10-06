@@ -57,7 +57,7 @@ public static class Rop
     public static Res<T> Run3<A, B, C, T>(Func<A, B, C, T> fn, A arg1, B arg2, C arg3) =>
         Run1((ValueTuple<A, B, C> abc) => fn(abc.Item1, abc.Item2, abc.Item3), (arg1, arg2, arg3));
 
-    public static Res<T> Inspect<T>(Action<T> onOk, Action<Exception> onFailed, Res<T> res)
+    public static Res<T> Inspect<T>(this  Res<T> res, Action<T> onOk, Action<Exception> onFailed)
     {
         try
         {
@@ -74,10 +74,10 @@ public static class Rop
         }
     }
 
-    public static Res<T> Log<T>(Action<T> onOk, Action<Exception> onFailed, Res<T> res) =>
-        Inspect(onOk, onFailed, res);
+    public static Res<T> Log<T>(this Res<T> res, Action<T> onOk, Action<Exception> onFailed) =>
+        res.Inspect(onOk, onFailed);
 
-    public static Res<U> Map<T, U>(Func<T, U> fn, Res<T> res)
+    public static Res<U> Map<T, U>(this Res<T> res, Func<T, U> fn)
     {
         if (!res.IsValid)
             return Failed<U>(res.Error);
@@ -96,7 +96,7 @@ public static class Rop
     /// Если ошибка — пробуем трансформировать Exception в результат.
     /// Если успех — возвращаем исходное значение.
     /// </summary>
-    public static Res<T> TryMapErr<T>(Func<Exception, T> fn, Res<T> res)
+    public static Res<T> TryMapErr<T>(this Res<T> res, Func<Exception, T> fn)
     {
         if (res.IsValid)
             return res;
@@ -111,7 +111,7 @@ public static class Rop
         }
     }
 
-    public static void Finish<T>(Action<T> f, Res<T> res)
+    public static void Finish<T>(this Res<T> res, Action<T> f)
     {
         if (res.IsValid)
         {
