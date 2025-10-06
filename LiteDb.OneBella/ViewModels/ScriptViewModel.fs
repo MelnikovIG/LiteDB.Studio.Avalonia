@@ -13,13 +13,13 @@ open Avalonia.Threading
 open LiteDB
 open LiteDb.Studio.Avalonia.Core
 open LiteDb.Studio.Avalonia.Infra
+open LiteDb.Studio.Avalonia.UseCases
 open LiteDb.Studio.Avalonia.ViewModels
 open Microsoft.FSharp.Core
 open OneBella.Core.Rop
 
 open Microsoft.FSharp.Control
 open ReactiveUI
-open OneBella.UseCases
 
 type ScriptViewModel(db: unit -> LiteDatabase, dbFile: string, name: string) as this =
     inherit ViewModelBase()
@@ -87,9 +87,9 @@ type ScriptViewModel(db: unit -> LiteDatabase, dbFile: string, name: string) as 
 
         Dispatcher.UIThread.Post(fun () ->
             if not (bsonValues = null) then
-                let tableName = RunSql.findTableName this.Query
+                let tableName = RunSql.FindTableName this.Query
                 for i in bsonValues do
-                    result.Add(BsonItem("result", i, -1, null, Option.toObj tableName, db, IsExpanded = true))
+                    result.Add(BsonItem("result", i, -1, null, tableName, db, IsExpanded = true))
 
                 paging.CalculatePages(querySw.Elapsed)
 
@@ -101,8 +101,8 @@ type ScriptViewModel(db: unit -> LiteDatabase, dbFile: string, name: string) as 
 
 
     let runSql (sql: String) token =
-        let uc = RunSql.create querySw sql db token
-        RunSql.run uc
+        let uc = RunSql.Create(querySw, sql, db, token)
+        RunSql.Run uc
 
     let stopCommand =
         let run () = //TODO.How to cancel a long running litedb query?

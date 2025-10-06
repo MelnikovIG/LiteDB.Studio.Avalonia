@@ -7,9 +7,6 @@ open LiteDb.Studio.Avalonia.Core
 open LiteDb.Studio.Avalonia.Infra
 open LiteDb.Studio.Avalonia.Repo
 open LiteDb.Studio.Avalonia.UseCases
-open OneBella
-open OneBella.Core
-open OneBella.UseCases
 open ReactiveUI
 
 type ConnectionItem(id, cs: ConnectionString, parent: ObservableCollection<ConnectionItem>) as this =

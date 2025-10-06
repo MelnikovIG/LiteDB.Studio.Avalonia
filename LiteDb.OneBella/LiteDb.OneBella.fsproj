@@ -25,9 +25,6 @@
     <ItemGroup>
         <Compile Include="Infra\Res.fs" />
     </ItemGroup>
-    <ItemGroup>
-        <Compile Include="UseCases\RunSql.fs" />
-    </ItemGroup>
 
     <ItemGroup>
         <AvaloniaResource Include="Assets\**" />
