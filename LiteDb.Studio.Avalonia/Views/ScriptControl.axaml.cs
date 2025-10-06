@@ -6,7 +6,7 @@ using LiteDb.Studio.Avalonia.ViewModels;
 
 namespace LiteDb.Studio.Avalonia.Views;
 
-public class ScriptControl : UserControl
+public partial class ScriptControl : UserControl
 {
     public ScriptControl()
     {

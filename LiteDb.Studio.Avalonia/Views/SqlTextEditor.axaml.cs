@@ -10,7 +10,7 @@ using AvaloniaEdit.Highlighting.Xshd;
 
 namespace LiteDb.Studio.Avalonia.Views;
 
-public class SqlTextEditor : UserControl
+public partial class SqlTextEditor : UserControl
 {
     public static readonly StyledProperty<string> TextProperty =
         AvaloniaProperty.Register<SqlTextEditor, string>(

@@ -12,7 +12,7 @@ using AvaloniaEdit.Highlighting.Xshd;
 
 namespace LiteDb.Studio.Avalonia.Views;
 
-public class JsonTextEditor : UserControl
+public partial class JsonTextEditor : UserControl
 {
     private DispatcherTimer foldingTimer;
     private CharFoldingStrategy folding;
