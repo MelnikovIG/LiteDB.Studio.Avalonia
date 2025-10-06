@@ -46,7 +46,7 @@ public partial class JsonTextEditor : UserControl
         foldingTimer.IsEnabled = false;
 
         var assembly = typeof(JsonTextEditor).Assembly;
-        using (var resource = assembly.GetManifestResourceStream("OneBella.Resources.json.xshd"))
+        using (var resource = assembly.GetManifestResourceStream("LiteDb.Studio.Avalonia.Resources.json.xshd"))
         {
             if (resource != null)
             {

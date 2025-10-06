@@ -11,7 +11,7 @@
         WindowState="Normal"
         
         ExtendClientAreaToDecorationsHint="True"
-        Title="OneBella">
+        Title="LiteDb.Studio.Avalonia">
 
     <Design.DataContext>
         <vm:MainWindowViewModel />

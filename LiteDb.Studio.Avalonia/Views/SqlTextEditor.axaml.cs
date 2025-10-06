@@ -38,7 +38,7 @@ public partial class SqlTextEditor : UserControl
         };
 
         var assembly = typeof(SqlTextEditor).Assembly;
-        using (var resource = assembly.GetManifestResourceStream("OneBella.Resources.sql.xshd"))
+        using (var resource = assembly.GetManifestResourceStream("LiteDb.Studio.Avalonia.Resources.sql.xshd"))
         {
             if (resource != null)
             {

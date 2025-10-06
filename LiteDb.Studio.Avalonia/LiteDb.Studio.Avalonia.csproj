@@ -17,7 +17,7 @@
         <CFBundleVersion>1.2.0</CFBundleVersion>
         <CFBundlePackageType>APPL</CFBundlePackageType>
         <CFBundleShortVersionString>LiteDb.Studio.Avalonia 1.2+</CFBundleShortVersionString>
-        <CFBundleSignature>com.fint.LiteDb.Studio.Avalonia</CFBundleSignature>
+        <CFBundleSignature>com.fint.litedb.studio.avalonia</CFBundleSignature>
         <CFBundleExecutable>LiteDb.Studio.Avalonia</CFBundleExecutable>
         <CFBundleIconFile>Resources/ldb.icns</CFBundleIconFile>
 <!--        <ApplicationIcon>Resources\ldb.ico</ApplicationIcon> &lt;!&ndash; Will be copied from output directory &ndash;&gt;-->
@@ -27,7 +27,7 @@
 
     <ItemGroup>
         <AvaloniaResource Include="Assets\**" />
-        <Content Include="OneBella.entitlements" />
+        <Content Include="LiteDb.Studio.Avalonia.entitlements" />
         <EmbeddedResource Include="Resources\json.xshd" />
         <EmbeddedResource Include="Resources\sql.xshd" />
         <AvaloniaResource Include="Resources\Styles.xaml" />

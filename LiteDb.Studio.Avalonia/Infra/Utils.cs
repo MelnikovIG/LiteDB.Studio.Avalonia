@@ -5,7 +5,7 @@ namespace LiteDb.Studio.Avalonia.Infra;
 
 public static class Utils
 {
-    public const string AppName = "OneBella";
+    public const string AppName = "LiteDb.Studio.Avalonia";
 
     public static string[] GetCultures()
     {
