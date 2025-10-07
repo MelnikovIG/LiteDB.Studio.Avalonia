@@ -11,7 +11,7 @@ public partial class AddConnectionWindow : Window
     {
         AvaloniaXamlLoader.Load(this);
 
-        var control = this.FindControl<ConnectionControl>("ConnectionControl");
+        var control = this.FindControl<ConnectionControl>("ConnectionControl")!;
         control.DataContext = conVm;
 
         if (control.ViewModel != null)
@@ -29,7 +29,7 @@ public partial class AddConnectionWindow : Window
     {
         get
         {
-            var control = this.FindControl<ConnectionControl>("ConnectionControl");
+            var control = this.FindControl<ConnectionControl>("ConnectionControl")!;
             return control.ViewModel?.SelectFileTask!;
         }
     }

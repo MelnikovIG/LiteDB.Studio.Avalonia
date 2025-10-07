@@ -12,8 +12,10 @@ namespace LiteDb.Studio.Avalonia.Views;
 
 public partial class MainWindow : Window
 {
-    private Flyout fly;
+    private Flyout? fly;
 
+    private MainWindowViewModel _vm => (this.DataContext as MainWindowViewModel)!;
+    
     public MainWindow()
     {
         InitializeComponent();
@@ -22,7 +24,7 @@ public partial class MainWindow : Window
 
         this.Closed += (_, __) =>
         {
-            var vm = (MainWindowViewModel)this.DataContext;
+            var vm = _vm;
             Repo.Repo.Disconnect();
             foreach (var d in vm.DbItems)
             {
@@ -35,7 +37,7 @@ public partial class MainWindow : Window
         {
             if (e.Key == Key.F5)
             {
-                var vm = (MainWindowViewModel)this.DataContext;
+                var vm = _vm;
                 if (vm.SelectedTab != null)
                 {
                     ICommand cmd = vm.SelectedTab.RunCommand;
@@ -52,23 +54,23 @@ public partial class MainWindow : Window
 
     private void ScriptTabFlyoutClickYes(object sender, RoutedEventArgs e)
     {
-        var main = (MainWindowViewModel)this.DataContext;
+        var main = _vm;
         if (main.Tabs.Count > 1)
         {
             var button = (Button)sender;
-            var tab = (ScriptViewModel)button.DataContext;
+            var tab = (button.DataContext as ScriptViewModel)!;
             main.Tabs.Remove(tab);
         }
 
-        fly.Hide();
+        fly?.Hide();
     }
 
     private void ScriptTabFlyoutClickNo(object sender, RoutedEventArgs e)
     {
-        fly.Hide();
+        fly?.Hide();
     }
 
-    private void OpenConnectionWindowClick(object sender, RoutedEventArgs e)
+    private void OpenConnectionWindowClick(object sender, RoutedEventArgs? e)
     {
         async Task ShowAddWindowAsync(Window mainWindow, ConnectionViewModel conVm)
         {
@@ -76,13 +78,11 @@ public partial class MainWindow : Window
 
             await w.ShowDialog(mainWindow);
             var con = await w.SelectFileTask;
-
-            var vm = (MainWindowViewModel)this.DataContext;
-
+            
             try
             {
                 conVm.Error = "";
-                vm.Connect(con);
+                _vm.Connect(con);
                 var uc = StoredConnUseCase.Create(Repo.Repo.GetDb);
                 StoredConnUseCase.Save(con, uc);
             }
@@ -95,12 +95,12 @@ public partial class MainWindow : Window
 
         async Task RunAsync()
         {
-            if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 var uc = StoredConnUseCase.Create(Repo.Repo.GetDb);
                 var savedConnections = StoredConnUseCase.LoadAll(uc).ToArray();
                 var vm = new ConnectionViewModel(savedConnections);
-                await ShowAddWindowAsync(desktop.MainWindow, vm);
+                await ShowAddWindowAsync(desktop.MainWindow!, vm);
             }
         }
 

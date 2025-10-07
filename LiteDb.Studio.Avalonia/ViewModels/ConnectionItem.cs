@@ -36,8 +36,8 @@ public class ConnectionItem : ViewModelBase
 
         if (cs.Collation != null)
         {
-            _selectedCulture = Array.Find(Utils.GetCultures(), x => x == cs.Collation.Culture.Name);
-            _selectedCompareOption = Array.Find(Utils.GetCompareOptions(), x => x == cs.Collation.SortOptions.ToString());
+            _selectedCulture = Array.Find(Utils.GetCultures(), x => x == cs.Collation.Culture.Name)!;
+            _selectedCompareOption = Array.Find(Utils.GetCompareOptions(), x => x == cs.Collation.SortOptions.ToString())!;
         }
         else
         {

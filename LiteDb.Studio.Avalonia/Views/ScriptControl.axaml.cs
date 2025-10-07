@@ -12,7 +12,7 @@ public partial class ScriptControl : UserControl
     {
         AvaloniaXamlLoader.Load(this);
 
-        var tree = this.FindControl<TreeDataGrid>("TreeDataGridResults");
+        var tree = this.FindControl<TreeDataGrid>("TreeDataGridResults")!;
 
         tree.DoubleTapped += (sender, e) =>
         {

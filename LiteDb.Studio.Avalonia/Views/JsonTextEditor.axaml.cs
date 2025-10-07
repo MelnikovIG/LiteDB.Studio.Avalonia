@@ -16,7 +16,7 @@ public partial class JsonTextEditor : UserControl
 {
     private DispatcherTimer foldingTimer;
     private CharFoldingStrategy folding;
-    private FoldingManager foldingManager;
+    private FoldingManager? foldingManager;
 
     public static readonly StyledProperty<string> TextProperty =
         AvaloniaProperty.Register<JsonTextEditor, string>(
@@ -38,7 +38,7 @@ public partial class JsonTextEditor : UserControl
         foldingTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
         foldingTimer.Tick += (s, e) => UpdateFoldings();
 
-        var editor = this.FindControl<TextEditor>("Editor");
+        var editor = this.FindControl<TextEditor>("Editor")!;
         editor.Document = new TextDocument { Text = "" };
         editor.TextChanged += (s, e) => Text = editor.Text;
 
@@ -60,7 +60,7 @@ public partial class JsonTextEditor : UserControl
 
     private void UpdateFoldings()
     {
-        var editor = this.FindControl<TextEditor>("Editor");
+        var editor = this.FindControl<TextEditor>("Editor")!;
         if (foldingManager == null)
         {
             foldingManager = FoldingManager.Install(editor.TextArea);
@@ -75,7 +75,7 @@ public partial class JsonTextEditor : UserControl
     private static string OnCoerceText(AvaloniaObject d, string arg)
     {
         var sender = (JsonTextEditor)d;
-        var editor = sender.FindControl<TextEditor>("Editor");
+        var editor = sender.FindControl<TextEditor>("Editor")!;
 
         if (editor.Text != arg)
         {

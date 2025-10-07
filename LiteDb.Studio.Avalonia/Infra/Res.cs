@@ -3,10 +3,10 @@ namespace LiteDb.Studio.Avalonia.Infra;
 public class Res<T>
 {
     public T Value { get; }
-    public Exception Error { get; }
+    public Exception? Error { get; }
     public bool IsValid => Error == null;
 
-    public Res(T value, Exception error)
+    public Res(T value, Exception? error)
     {
         Value = value;
         Error = error;
@@ -24,7 +24,7 @@ public static class Rop
     public static Res<U> Bind<T, U>(Func<T, Res<U>> fn, Res<T> res)
     {
         if (!res.IsValid)
-            return Failed<U>(res.Error);
+            return Failed<U>(res.Error!);
 
         try
         {
@@ -64,7 +64,7 @@ public static class Rop
             if (res.IsValid)
                 onOk(res.Value);
             else
-                onFailed(res.Error);
+                onFailed(res.Error!);
 
             return res;
         }
@@ -80,7 +80,7 @@ public static class Rop
     public static Res<U> Map<T, U>(this Res<T> res, Func<T, U> fn)
     {
         if (!res.IsValid)
-            return Failed<U>(res.Error);
+            return Failed<U>(res.Error!);
 
         try
         {
@@ -103,7 +103,7 @@ public static class Rop
 
         try
         {
-            return Ok(fn(res.Error));
+            return Ok(fn(res.Error!));
         }
         catch (Exception ex)
         {

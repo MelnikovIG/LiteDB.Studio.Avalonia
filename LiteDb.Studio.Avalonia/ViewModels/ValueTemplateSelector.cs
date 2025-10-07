@@ -9,7 +9,7 @@ public class ValueTemplateSelector : IDataTemplate
     [Content]
     public Dictionary<string, IDataTemplate> AvailableTemplates { get; set; } = new();
 
-    public Control Build(object param)
+    public Control Build(object? param)
     {
         if (param is not BsonItem item)
             return new TextBlock { Text = "Invalid item" };
@@ -41,11 +41,11 @@ public class ValueTemplateSelector : IDataTemplate
             key = "Doc";
 
         if (AvailableTemplates.TryGetValue(key, out var template))
-            return template.Build(param);
+            return template.Build(param)!;
 
         // fallback control
         return new TextBlock { Text = $"No template for: {item.Type}" };
     }
 
-    public bool Match(object data) => data is BsonItem;
+    public bool Match(object? data) => data is BsonItem;
 }

@@ -29,7 +29,7 @@ public partial class SqlTextEditor : UserControl
     {
         AvaloniaXamlLoader.Load(this);
 
-        var editor = this.FindControl<TextEditor>("Editor");
+        var editor = this.FindControl<TextEditor>("Editor")!;
         editor.Document = new TextDocument { Text = "" };
 
         editor.TextChanged += (s, e) =>
@@ -53,7 +53,7 @@ public partial class SqlTextEditor : UserControl
     private static string OnCoerceText(AvaloniaObject d, string arg)
     {
         var sender = (SqlTextEditor)d;
-        var editor = sender.FindControl<TextEditor>("Editor");
+        var editor = sender.FindControl<TextEditor>("Editor")!;
         if (editor.Text != arg)
         {
             editor.Text = arg;

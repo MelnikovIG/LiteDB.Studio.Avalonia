@@ -9,7 +9,7 @@ namespace LiteDb.Studio.Avalonia.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-    private ScriptViewModel _selectedTab;
+    private ScriptViewModel? _selectedTab;
     private readonly ObservableCollection<ScriptViewModel> _scriptTabs = new();
     public ObservableCollection<DbItem> DbItems { get; } = new();
 
@@ -22,7 +22,7 @@ public class MainWindowViewModel : ViewModelBase
     {
         var root = DbItems.FirstOrDefault();
         if (root is not DbFileItem f) return;
-        OpenNewTab(() => f.LiteDb, f.ConnectionString.Filename, "<Todo>");
+        OpenNewTab(() => f.LiteDb!, f.ConnectionString.Filename, "<Todo>");
     }
 
     private void OpenNewTab(System.Func<LiteDatabase> getLiteDb, string dbFile, string tableName)
@@ -51,7 +51,7 @@ public class MainWindowViewModel : ViewModelBase
 
     public ObservableCollection<ScriptViewModel> Tabs => _scriptTabs;
 
-    public ScriptViewModel SelectedTab
+    public ScriptViewModel? SelectedTab
     {
         get => _selectedTab;
         set => this.RaiseAndSetIfChanged(ref _selectedTab, value);
