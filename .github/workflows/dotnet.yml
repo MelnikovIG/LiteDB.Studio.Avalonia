@@ -31,7 +31,7 @@ jobs:
         with:
           dotnet-version: 9.0.x
       - name: Publish
-        run: dotnet publish ./LiteDb.Studio.Avalonia/LiteDb.Studio.Avalonia.csproj -o "${{ matrix.target }}-${{ github.ref_name }} -c Release --runtime "${{ matrix.target }}" --self-contained true /p:PublishSingleFile=true /p:IncludeAllContentForSelfExtract=true /p:EnableCompressionInSingleFile=true /p:DebugType=None /p:DebugSymbols=false
+        run: dotnet publish ./LiteDb.Studio.Avalonia/LiteDb.Studio.Avalonia.csproj -o "${{ matrix.target }}-${{ github.ref_name }}" -c Release --runtime "${{ matrix.target }}" --self-contained true /p:PublishSingleFile=true /p:IncludeAllContentForSelfExtract=true /p:EnableCompressionInSingleFile=true /p:DebugType=None /p:DebugSymbols=false
       - name: Archive Release
         uses: thedoctor0/zip-release@0.7.5
         with:
