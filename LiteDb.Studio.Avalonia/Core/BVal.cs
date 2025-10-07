@@ -21,19 +21,19 @@ public abstract record BValType
 {
     public BsonValue Raw => this switch
     {
-        Document d => d.Raw,
-        Array a => a.Raw,
-        Bytes b => b.Raw,
-        Bool b => b.Raw,
-        Decimal d => d.Raw,
-        Double d => d.Raw,
-        Guid g => g.Raw,
-        Int i => i.Raw,
-        Long l => l.Raw,
-        String s => s.Raw,
-        DateTime d => d.Raw,
-        Nil n => n.Raw,
-        ObjectId o => o.Raw,
+        Document d => d.Value.Raw,
+        Array a => a.Value.Raw,
+        Bytes b => b.Value.Raw,
+        Bool b => b.Value.Raw,
+        Decimal d => d.Value.Raw,
+        Double d => d.Value.Raw,
+        Guid g => g.Value.Raw,
+        Int i => i.Value.Raw,
+        Long l => l.Value.Raw,
+        String s => s.Value.Raw,
+        DateTime d => d.Value.Raw,
+        Nil n => n.Value.Raw,
+        ObjectId o => o.Value.Raw,
         _ => throw new InvalidOperationException()
     };
 
