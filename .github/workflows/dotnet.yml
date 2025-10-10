@@ -20,7 +20,7 @@ jobs:
             target: win-x64
           - kind: macOS
             os: macos-latest
-            target: osx-x64
+            target: osx-arm64
     
     runs-on: ${{ matrix.os }}
 
@@ -30,8 +30,20 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.0.x
-      - name: Publish
-        run: dotnet publish ./LiteDb.Studio.Avalonia/LiteDb.Studio.Avalonia.csproj -o "${{ matrix.target }}-${{ github.ref_name }}" -c Release --runtime "${{ matrix.target }}" --self-contained true /p:PublishSingleFile=true /p:IncludeAllContentForSelfExtract=true /p:EnableCompressionInSingleFile=true /p:DebugType=None /p:DebugSymbols=false
+      - name: Publish (non Macos)
+        if: matrix.kind != 'macOS'
+        run: >
+          dotnet publish ./LiteDb.Studio.Avalonia/LiteDb.Studio.Avalonia.csproj -p:PublishDir=./dist/${{ matrix.target }}-${{ github.ref_name }} -c Release --runtime "${{ matrix.target }}" --self-contained true /p:PublishSingleFile=true /p:IncludeAllContentForSelfExtract=true /p:EnableCompressionInSingleFile=true /p:DebugType=None /p:DebugSymbols=false
+      - name: Publish (Macos)
+        if: matrix.kind == 'macOS'
+        run: >
+          dotnet restore -r ${{ matrix.target }} &&
+          dotnet msbuild ./LiteDb.Studio.Avalonia/LiteDb.Studio.Avalonia.csproj -t:BundleApp -p:PublishDir=./dist/${{ matrix.target }}-${{ github.ref_name }} -p:Configuration=Release -p:RuntimeIdentifier=${{ matrix.target }} -p:SelfContained=true /p:PublishSingleFile=true /p:IncludeAllContentForSelfExtract=true /p:EnableCompressionInSingleFile=true /p:DebugType=None /p:DebugSymbols=false &&
+          ls &&
+          rm  ./LiteDb.Studio.Avalonia/dist/${{ matrix.target }}-${{ github.ref_name }}/LiteDb.Studio.Avalonia
+      - name: Move dir to root
+        run: >
+          mv ./LiteDb.Studio.Avalonia/dist/${{ matrix.target }}-${{ github.ref_name }} ./${{ matrix.target }}-${{ github.ref_name }}
       - name: Archive Release
         uses: thedoctor0/zip-release@0.7.5
         with:
